@@ -13,16 +13,20 @@ for t in range(T):
     S = input().split()
 
     order = [0] * (L + 1)
-    minEl = S[0]
+    minEl = int(S[0])
     minPos = 0
     for i in range(1,L):
         if int(S[i]) < minEl:
-            minEl = S[i]
+            minEl = int(S[i])
             minPos = i
 
-    # if i == L - 1:
-
+    order.insert(minPos, math.gcd(int(S[0]), int(S[1])))
     
+    for i in range(minPos, 0, -1):
+        order.insert(i, int(S[i]) // order[i])
+
+    for i in range(minPos, L):
+        order.insert(i, int(S[i]) // order[i])
 
     firstNum = math.gcd(int(S[0]), int(S[1]))
     order.append(int(S[0])//firstNum)
